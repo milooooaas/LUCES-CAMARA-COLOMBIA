@@ -271,7 +271,11 @@ dialog::backdrop { background: rgb(21 31 44 / 64%); backdrop-filter: blur(4px); 
   html { scroll-padding-top: 75px; }
   .shell { width: calc(100% - 36px); }
   .nav { min-height: 66px; }
-  .brand-mark { width: 35px; height: 35px; }
+  .brand-mark { width: 35px; height: 35px; flex-basis: 35px; }
+  .nav { gap: 12px; }
+  .brand { gap: 8px; }
+  .brand-copy strong { font-size: 11px; }
+  .brand-copy small { font-size: 9px; }
   .hero { display: flex; min-height: auto; align-items: stretch; flex-direction: column; gap: 25px; padding-top: 43px; padding-bottom: 78px; }
   .hero-copy { padding: 0; }
   .eyebrow { gap: 8px; font-size: 8px; }
@@ -299,11 +303,15 @@ dialog::backdrop { background: rgb(21 31 44 / 64%); backdrop-filter: blur(4px); 
   .filter-row { gap: 7px; }
   .filter-label { width: 100%; margin-bottom: 3px; }
   .filter-button { padding: 7px 10px; font-size: 8px; }
-  .film-grid { gap: 10px; }
-  .film-poster { min-height: 155px; }
-  .film-info { padding: 12px; }
-  .film-info h3 { font-size: 12px; }
-  .film-info p { font-size: 9px; }
+  .film-grid { grid-template-columns: 1fr; gap: 12px; }
+  .film-card { display: grid; grid-template-columns: minmax(105px, 34%) minmax(0, 1fr); align-items: stretch; }
+  .film-poster { min-height: 205px; height: 100%; }
+  .film-info { padding: 14px; }
+  .film-info h3 { font-size: 14px; line-height: 1.35; }
+  .film-info p { min-height: 0; font-size: 11px; line-height: 1.65; }
+  .film-meta { font-size: 8px; }
+  .film-source { font-size: 9px; }
+  .text-button { margin-top: 10px; font-size: 10px; }
   .leader-panel { grid-template-columns: 1fr; }
   .leader-photo { min-height: 310px; }
   .leader-photo .leader-portrait { width: 220px; height: 260px; }
@@ -326,7 +334,7 @@ dialog::backdrop { background: rgb(21 31 44 / 64%); backdrop-filter: blur(4px); 
   .join-decoration span { font-size: 76px; }
   .join-form { padding: 31px 21px 25px; }
   .form-grid { gap: 12px 9px; }
-  .field { font-size: 8px; }
+  .field { font-size: 10px; }
   .field input:not([type="radio"]), .field textarea, .field select { font-size: 10px; }
   .footer-main { grid-template-columns: 1fr 1fr; }
   .footer-motto { font-size: 13px; text-align: right; }
@@ -337,8 +345,11 @@ dialog::backdrop { background: rgb(21 31 44 / 64%); backdrop-filter: blur(4px); 
   .shell { width: calc(100% - 28px); }
   .hero h1 { font-size: 54px; }
   .hero-actions { align-items: stretch; flex-direction: column; }
-  .film-grid { grid-template-columns: 1fr; }
-  .film-poster { min-height: 200px; }
+  .film-card { grid-template-columns: 105px minmax(0, 1fr); }
+  .film-poster { min-height: 185px; }
+  .film-info { padding: 11px; }
+  .film-info h3 { font-size: 12px; }
+  .film-info p { font-size: 10px; }
   .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(2, 140px); }
   .form-grid { grid-template-columns: 1fr; }
   .field-full { grid-column: auto; }
