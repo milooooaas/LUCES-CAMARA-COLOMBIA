@@ -1,4 +1,4 @@
-# Luces, cámara, acción
+# Luces, cámara, Colombia
 
 Sitio estático para presentar el Centro de Interés de cine colombiano. Abre `index.html` en un navegador o publícalo en cualquier alojamiento de sitios estáticos.
 
