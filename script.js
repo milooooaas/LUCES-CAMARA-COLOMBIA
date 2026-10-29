@@ -232,7 +232,10 @@ form.addEventListener("submit", async (event) => {
   } catch (error) {
     console.error("No se pudo enviar la respuesta del formulario:", error);
     formStatus.classList.add("is-error");
-    formStatus.textContent = "No pudimos enviar tu respuesta. Revisa tu conexión e inténtalo de nuevo.";
+    const detail = error instanceof Error ? error.message : "";
+    formStatus.textContent = detail
+      ? `No se pudo enviar: ${detail} Si es la primera vez, revisa lv143944@gmail.com (también Spam) y confirma el correo de activación de FormSubmit.`
+      : "No pudimos conectar con el servicio. Revisa tu conexión e inténtalo de nuevo. Si es la primera vez, confirma el correo de activación de FormSubmit en lv143944@gmail.com, incluida la carpeta Spam.";
   } finally {
     submitButton.disabled = false;
     submitButton.innerHTML = 'Enviar mi respuesta <span aria-hidden="true">↗</span>';
