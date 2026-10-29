@@ -9,11 +9,10 @@ Sitio estático para presentar el Centro de Interés de cine colombiano. Abre `i
 - **Galería:** reemplaza los espacios indicados en `index.html` por fotografías reales y autorizadas. Cada botón de imagen puede contener un `<img src="images/actividad.jpg" alt="Descripción de la foto">`; el visor se activa automáticamente.
 - **Institución:** si se desea, añade el nombre de la institución en el pie de página.
 
-## Envío del formulario a Gmail
+## Envío del formulario por WhatsApp
 
-El formulario usa [FormSubmit](https://formsubmit.co/) para enviar respuestas sin exponer claves ni contraseñas en el navegador. La dirección destinataria configurada es `lv143944@gmail.com`.
+El formulario prepara las respuestas en un chat de WhatsApp con el número `+57 316 588 9720`.
 
-1. Publica el sitio y envía una respuesta de prueba. FormSubmit enviará un mensaje de activación a `lv143944@gmail.com`; abre el correo y confirma la activación del formulario.
-2. Envía otra prueba y comprueba que la respuesta llegue a Gmail. El sitio muestra el mensaje de éxito solo si el servicio confirma el envío.
+Al completar el formulario, se abre WhatsApp con el mensaje listo. La persona debe revisar las respuestas y pulsar **Enviar** en WhatsApp; una página estática no puede enviar el mensaje por sí sola ni confirmar que fue recibido.
 
-El envío requiere conexión a internet y la activación inicial del servicio. No se incluyen credenciales privadas en los archivos del sitio.
+Se necesita WhatsApp o WhatsApp Web y conexión a internet.

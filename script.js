@@ -47,8 +47,8 @@ const films = [
   }
 ];
 
-// Set the Gmail inbox that should receive participation form responses.
-const recipientEmail = "lv143944@gmail.com";
+// WhatsApp click-to-chat needs the country code and digits only.
+const participationWhatsAppNumber = "573165889720";
 
 const filmGrid = document.querySelector("#film-grid");
 const movieDialog = document.querySelector("#movie-dialog");
@@ -192,52 +192,33 @@ document.querySelectorAll(".purpose-card, .center-ribbon, .film-card, .leader-pa
   else element.classList.add("is-visible");
 });
 
-form.addEventListener("submit", async (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
   formStatus.classList.remove("is-error");
-  formStatus.textContent = "";
+  formStatus.replaceChildren();
   if (!form.reportValidity()) return;
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(recipientEmail) || recipientEmail.includes("TU_CORREO_GMAIL")) {
-    formStatus.classList.add("is-error");
-    formStatus.textContent = "Antes de enviar, configura el correo destinatario en script.js.";
-    return;
-  }
+  const answers = new FormData(form);
+  const message = [
+    "Nueva respuesta para el Centro de Interés Luces, Cámara, Colombia",
+    "",
+    `Nombre completo: ${answers.get("nombre")}`,
+    `Grado y curso: ${answers.get("grado")}`,
+    `Correo electrónico: ${answers.get("email")}`,
+    `Interés en el cine colombiano: ${answers.get("interes")}`,
+    `Qué le gustaría aprender: ${answers.get("aprender")}`,
+    `Ha visto una película colombiana: ${answers.get("ha_visto")}`,
+    `Película: ${answers.get("pelicula") || "No indicó"}`,
+    `Motivo para participar: ${answers.get("motivo")}`
+  ].join("\n");
+  const whatsappUrl = `https://wa.me/${participationWhatsAppNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappLink = document.createElement("a");
+  whatsappLink.href = whatsappUrl;
+  whatsappLink.target = "_blank";
+  whatsappLink.rel = "noopener noreferrer";
+  whatsappLink.textContent = "Abrir WhatsApp con mis respuestas";
 
-  const submitButton = form.querySelector(".submit-button");
-  submitButton.disabled = true;
-  submitButton.innerHTML = "Enviando…";
-  const payload = new FormData(form);
-  payload.set("_subject", "Nueva respuesta — Centro de Interés de cine colombiano");
-  payload.set("_template", "table");
-  payload.set("_captcha", "false");
-
-  try {
-    const response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipientEmail)}`, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: payload
-    });
-    let result;
-    try {
-      result = await response.json();
-    } catch (error) {
-      throw new Error("El servicio devolvió una respuesta que no se pudo leer.");
-    }
-    if (!response.ok || result.success !== "true" && result.success !== true) {
-      throw new Error(result.message || "El servicio no confirmó el envío.");
-    }
-    form.reset();
-    formStatus.textContent = "¡Gracias por tu interés! Tus respuestas han sido enviadas correctamente.";
-  } catch (error) {
-    console.error("No se pudo enviar la respuesta del formulario:", error);
-    formStatus.classList.add("is-error");
-    const detail = error instanceof Error ? error.message : "";
-    formStatus.textContent = detail
-      ? `No se pudo enviar: ${detail} Si es la primera vez, revisa lv143944@gmail.com (también Spam) y confirma el correo de activación de FormSubmit.`
-      : "No pudimos conectar con el servicio. Revisa tu conexión e inténtalo de nuevo. Si es la primera vez, confirma el correo de activación de FormSubmit en lv143944@gmail.com, incluida la carpeta Spam.";
-  } finally {
-    submitButton.disabled = false;
-    submitButton.innerHTML = 'Enviar mi respuesta <span aria-hidden="true">↗</span>';
-  }
+  formStatus.textContent = "Se preparó el mensaje en WhatsApp. Revísalo y pulsa Enviar allí para completar el envío. Si WhatsApp no se abrió, usa este enlace: ";
+  formStatus.append(whatsappLink);
+  window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 });
